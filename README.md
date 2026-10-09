@@ -11,7 +11,7 @@ An interactive enterprise technology storytelling experience.
 The working application has been imported through **Phase 6D.1**.
 Source snapshot: `89d992d242c471cb829573493cebcebf528171de`.
 This is a snapshot import, not a copy of the original Git history.
-Phase 6D.2 is requested but **not implemented**: its approved visual reference still needs to be supplied in the implementation conversation.
+Phase 6D.2 now has an isolated opening preview in `dist/prototypes/ask-your-data-6d2.html`. Run `npm start` and visit `/prototypes/ask-your-data-6d2.html`. The approved main experience remains unchanged. See `docs/phase-6d2-qa.md` for scope and verification limits. 68 automated tests pass; visual approval is pending.
 
 ## Run locally
 Requires Node.js 18+ and Python 3. No dependency installation or backend is required.
