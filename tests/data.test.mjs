@@ -1,0 +1,6 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {revenue,stores,signals} from '../dist/data-dataset.js';
+import {createShowSession} from '../dist/show-session.js';
+test('synthetic dataset reconciles totals, regions, categories, orders and store cohort',()=>{const sum=(rows,key)=>rows.reduce((n,r)=>n+r[key],0);assert.equal(sum(revenue,'previous'),1e9);assert.equal(sum(revenue,'current'),916e6);const west=revenue.filter(r=>r.region==='West');assert.equal(sum(west,'current'),429e6);const b=revenue.filter(r=>r.category==='B');assert.equal(sum(b,'current'),276.5e6);assert.equal(sum(stores,'previous'),240e6);assert.equal(sum(stores,'current'),176e6);assert.equal(signals.returningOrders.current+signals.newOrders.current,signals.orders.current);assert.equal(signals.orders.current*100000,sum(revenue,'current'));});
+test('local event store isolates subscribers and snapshots',()=>{const session=createShowSession();session.start('ask-your-data');session.start('ask-your-data');session.subscribe(()=>{throw new Error('consumer failed');});session.emit('customer_signal_added','ask-your-data',{value:'multiple_systems'});const events=session.snapshot();events[1].payload.value='changed';assert.equal(session.snapshot()[1].payload.value,'multiple_systems');assert.equal(events.length,2);assert.throws(()=>session.emit('invalid','x'));});
