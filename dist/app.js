@@ -166,7 +166,7 @@ function render(){
  else content='<section class="empty"><h1>Story not found.</h1><a href="#/explore">← Return to the universe</a></section>';
  app.innerHTML=`${presenting?'':header()}<main id="main" tabindex="-1">${content}</main>${presenting?'':'<footer><span>DATALABS SHOWROOM</span><span>Explore a challenge. Experience the transformation.</span></footer>'}`;
  questionMotion.restore(app);
- questionMotion.sync(id==='ask-your-data'&&mode!=='learn'&&!document.hidden,state?.scene,()=>{act('connection-complete',undefined,'simulation');render();});
+ questionMotion.sync(id==='ask-your-data'&&mode!=='learn'&&!document.hidden,states['ask-your-data'].scene,()=>{act('connection-complete',undefined,'simulation');render();});
  threadMotion.restore(app);
  cloudMotion.restore(app);
  migrationMotion.restore(app);
